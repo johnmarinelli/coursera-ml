@@ -12,18 +12,21 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
-theta0 = theta(1);
-theta1 = theta(2);
 
-for i = 1:m
-  row = [X(i, 1), X(i, 2)];
-  hyp = theta0 * row(1) + theta1 * row(2);
-  diff = hyp - y(i);
-  sqrd = diff * diff;
-  J = J + sqrd;
-end
+J = 1 / (2 * m) * (X * theta - y)' * (X * theta - y)
 
-J  = 1 / (2 * m) * J
+%theta0 = theta(1);
+%theta1 = theta(2);
+%
+%for i = 1:m
+%  row = [X(i, 1), X(i, 2)];
+%  hyp = theta0 * row(1) + theta1 * row(2);
+%  diff = hyp - y(i);
+%  sqrd = diff * diff;
+%  J = J + sqrd;
+%end
+%
+%J  = 1 / (2 * m) * J
 
 % =========================================================================
 

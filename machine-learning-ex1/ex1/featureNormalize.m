@@ -26,13 +26,26 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
+mu = mean(X)
+sigma = std(X)
 
+% foreach feature (non-vectorised)
+%for col=1:size(X, 2)
+%  c = X(:,col)
+%  m = mu(col)
+%  s = sigma(col)
+%  
+%  for row=1:size(c,1)
+%    X_norm(row, col) = (c(row) - m) / s
+%  end
+%end
 
+% vectorised
+o = ones(length(X), 1)
+mu_matrix = o * mu
+sigma_matrix = o * sigma
 
-
-
-
-
+X_norm = (X .- mu_matrix) ./ sigma_matrix
 
 % ============================================================
 
