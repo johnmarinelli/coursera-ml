@@ -26,8 +26,8 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-mu = mean(X)
-sigma = std(X)
+mu = mean(X);
+sigma = std(X);
 
 % foreach feature (non-vectorised)
 %for col=1:size(X, 2)
@@ -41,11 +41,11 @@ sigma = std(X)
 %end
 
 % vectorised
-o = ones(length(X), 1)
-mu_matrix = o * mu
-sigma_matrix = o * sigma
+o = ones(length(X), 1);
+mu_matrix = o * mu;
+sigma_matrix = o * sigma;
 
-X_norm = (X .- mu_matrix) ./ sigma_matrix
+X_norm = (X .- mu_matrix) ./ sigma_matrix;
 
 % ============================================================
 
