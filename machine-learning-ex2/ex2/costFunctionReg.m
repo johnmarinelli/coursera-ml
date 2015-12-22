@@ -23,7 +23,7 @@ neg = (1 - y') * log(1 - hyp);
 regularization_term = (lambda / (2 * m)) * sum(theta(2:rows(theta)) .^ 2);
 
 J = (1 / m) * (pos - neg) + regularization_term;
-grad = (1 / m) * (X' * (hyp - y)) + ((lambda / m) * [0; theta(2:rows(theta))])
+grad = (1 / m) * (X' * (hyp - y)) + ((lambda / m) * [0; theta(2:rows(theta))]);
 
 % =============================================================
 
