@@ -30,10 +30,9 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
-
+preds = X * all_theta';
+% ~ means we don't care about that return val
+[~, p] = max(preds, [], 2);
 
 
 % =========================================================================

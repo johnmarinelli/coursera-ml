@@ -36,8 +36,6 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-y
-
 hyp = sigmoid(X*theta); % column vector of g(z) for each example
 
 pos = -y' * log(hyp); % column vector: if hyp = 1 for each example
@@ -46,8 +44,8 @@ reg = (lambda / (2*m)) * sum(theta([2:end]) .^ 2); % exclude first bias unit fro
 
 J = (1 / m) * (pos - neg) + reg; % usual cost function, except we sum up 
 
-g_reg = (lambda / m) .* theta;
-g_reg(1) = 0;
+g_reg = (lambda / m) .* theta; % regularization parameter for gradient for each example
+g_reg(1) = 0; % ignore first unit
 
 grad = ((1 / m) .* X' * (hyp - y)) + g_reg;
 
