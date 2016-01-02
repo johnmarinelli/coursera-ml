@@ -24,6 +24,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 
 % Setup some useful variables
 m = size(X, 1);
+layers = 3;
          
 % You need to return the following variables correctly 
 J = 0;
@@ -88,18 +89,59 @@ end
 
 J = (1/m) * J
 
+% ===================== BACKPROP ==================== %
+
+for t = 1:m
+  % calculate activation layers
+  a1 = [1; X(t, :)']; 
+  z2 = Theta1 * a1;
+  a2 = [1; sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+
+  yy = ([1:num_labels] == y(t))';
+  delta3 = a3 - yy;
+  delta2 = (Theta2' * delta3) .* [1;sigmoidGradient(z2)];
+  delta2 = delta2(2:end); % remove bias row
+ 
+  % delta1 is irrelevant because no error in input
+
+  Theta1_grad = Theta1_grad + delta2 * a1';
+  Theta2_grad = Theta2_grad + delta3 * a2';
+end
+
+Theta1_grad *= (1/m);
+Theta2_grad *= (1/m);
+
+if (j != 0)
+  Theta1_grad +=  ((lambda / m) * [zeros(size(Theta1, 1), 1) Theta1(:, 2:size(Theta1, 2))]);
+  Theta2_grad +=  ((lambda / m) * [zeros(size(Theta2, 1), 1) Theta2(:, 2:size(Theta2, 2))]);
+end
 
 
+% ===================== REGULARIZATION ================ %
+
+regularizationParam = 0;
+sizeTheta1 = size(Theta1)
+sizeTheta2 = size(Theta2)
+
+for row = 1:sizeTheta1(1)
+  for col = 2:sizeTheta1(2)
+    regularizationParam += (Theta1(row,col) ^ 2);
+  end
+end
+
+for row = 1:sizeTheta2(1)
+  for col = 2:sizeTheta2(2)
+    regularizationParam += (Theta2(row, col) ^ 2);
+  end
+end
 
 
+regularizationParam *= (lambda / (2 * m))
 
 
-
-
-
-
-
-
+J += regularizationParam
 
 
 
